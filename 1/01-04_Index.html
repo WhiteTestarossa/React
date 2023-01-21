@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>РДWП-Лабораторная 01</title>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const InName = () => {   // STATELESS компонент
+
+            // onchange = (e) => {
+            //     console.log(e.target.value)
+            // }
+
+            return (
+                <div>
+                    <label>Фамилия, имя, отчество</label>
+                    <input type='txt' onChange={onchange} />
+                </div>
+            )
+        };
+
+        class InGender extends React.Component { //STATEFULL компонент
+            state = { gender: 'М' }
+
+            handleChoice = (e) => {
+                if (e.currentTarget.value == this.state.gender) { }
+                else {
+                    this.setState({ gender: e.currentTarget.value }, () => {
+                        console.log('gender', this.state.gender)
+                    })
+                }
+            }
+
+            render() {
+                return (
+                    <div>
+                        <label>
+                            <input id='М' type='radio' onChange={this.handleChoice} value = 'М' checked={this.state.gender == 'М'} /> М
+                        </label>
+                        <label>
+                            <input id='Ж' type='radio' onChange={this.handleChoice} value = 'Ж' checked={this.state.gender == 'Ж'} /> Ж
+                        </label>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <div>
+                <h2>Студент</h2> {/*JSX - это HTML-разметка + переменные/выражения.*/}
+                <InName />
+                <InGender />
+            </div>,
+            document.getElementById('root')
+        );
+    </script>
+
+</body>
+
+</html>
